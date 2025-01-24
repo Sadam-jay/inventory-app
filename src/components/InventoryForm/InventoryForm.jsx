@@ -19,9 +19,10 @@ const InventoryForm = ({ addItem }) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
+    <form className="inventory-form" onSubmit={onSubmitHandler}>
       <input
         type="text"
+        className="input-field"
         placeholder="Item Name"
         value={newItem.name}
         onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
@@ -29,19 +30,25 @@ const InventoryForm = ({ addItem }) => {
       />
       <input
         type="text"
+        className="input-field"
         placeholder="Category"
         value={newItem.category}
         onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
         required
       />
       <input
-        type="text"
+        type="number"
+        className="input-field"
         placeholder="Quantity"
         value={newItem.quantity}
-        onChange={(e) => setNewItem({ ...newItem, quantity: e.target.value })}
+        onChange={(e) =>
+          setNewItem({ ...newItem, quantity: Number(e.target.value) })
+        }
         required
       />
-      <button type="submit">Add Item</button>
+      <button className="add-btn" type="submit">
+        Add Item
+      </button>
     </form>
   );
 };

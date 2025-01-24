@@ -44,8 +44,8 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Inventory Management</h1>
+    <div className="container">
+      <h1 className="heading">Inventory Management</h1>
       <InventoryForm addItem={addItem} />
       <InventoryTable
         items={items}

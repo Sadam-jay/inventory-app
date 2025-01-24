@@ -16,7 +16,7 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
   };
 
   return (
-    <table border="1">
+    <table className="inventory-table">
       <thead>
         <tr>
           <th>Name</th>
@@ -30,15 +30,14 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
         {items.map((item) => (
           <tr
             key={item.id}
-            style={{
-              backgroundColor: item.quantity < 10 ? "lightcoral" : "white",
-            }}
+            className={`inventory-row ${item.quantity < 10 ? "low-stock" : ""}`}
           >
             {editById === item.id ? (
               <>
                 <td>
                   <input
                     type="text"
+                    className="edit-input"
                     value={editedItem.name}
                     onChange={(e) =>
                       setEditedItem({ ...editedItem, name: e.target.value })
@@ -48,6 +47,7 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
                 <td>
                   <input
                     type="text"
+                    className="edit-input"
                     value={editedItem.category}
                     onChange={(e) =>
                       setEditedItem({ ...editedItem, category: e.target.value })
@@ -56,7 +56,8 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
                 </td>
                 <td>
                   <input
-                    type="text"
+                    type="number"
+                    className="edit-input"
                     value={editedItem.quantity}
                     onChange={(e) =>
                       setEditedItem({
@@ -67,8 +68,15 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
                   />
                 </td>
                 <td>
-                  <button onClick={saveEdited}>Save</button>
-                  <button onClick={() => setEditById(null)}>Cancel</button>
+                  <button className="save-btn" onClick={saveEdited}>
+                    Save
+                  </button>
+                  <button
+                    className="cancel-btn"
+                    onClick={() => setEditById(null)}
+                  >
+                    Cancel
+                  </button>
                 </td>
               </>
             ) : (
@@ -77,8 +85,15 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
                 <td>{item.category}</td>
                 <td>{item.quantity}</td>
                 <td>
-                  <button onClick={() => edit(item)}>Edit</button>
-                  <button onClick={() => deleteItem(item.id)}>Delete</button>
+                  <button className="edit-btn" onClick={() => edit(item)}>
+                    Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteItem(item.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </>
             )}
