@@ -1,0 +1,76 @@
+table {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+input {
+  padding: 5px;
+  font-size: 14px;
+  width: 80%;
+}
+
+button {
+  padding: 5px 10px;
+  margin: 2px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:nth-child(1) {
+  /* Edit button */
+  background-color: #ffc107;
+  color: black;
+}
+
+button:nth-child(2) {
+  /* Delete button */
+  background-color: #dc3545;
+  color: white;
+}
+
+button:nth-child(3) {
+  /* Save button */
+  background-color: #28a745;
+  color: white;
+}
+
+button:nth-child(4) {
+  /* Cancel button */
+  /* width: 200px; */
+  background-color: #6c757d;
+  color: white;
+}
+
+tr[style*="lightcoral"] {
+  background-color: lightcoral !important;
+  color: white;
+}
