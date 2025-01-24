@@ -1,8 +1,9 @@
 .inventory-form {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.5fr;
   gap: 10px;
   padding: 10px;
-  /* max-width: 300px; */
+  max-width: 1000px;
   margin-bottom: 2rem;
   margin-left: -0.5rem;
 }
@@ -31,4 +32,32 @@
 
 .add-btn:hover {
   background-color: #218838;
+}
+
+@media (max-width: 900px) {
+  .inventory-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* max-width: 90%; */
+    padding: 10px;
+  }
+
+  .input-field {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inventory-form {
+    display: flex;
+    flex-direction: column;
+    /* max-width: 90%; */
+    padding: 10px;
+  }
+
+  .input-field {
+    font-size: 14px;
+    padding: 8px;
+  }
 }
