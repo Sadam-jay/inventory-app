@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import "./InventoryTable.css";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TextField,
+  Button,
+  Paper,
+} from "@mui/material";
 
 const InventoryTable = ({ items, updateItem, deleteItem }) => {
   const [editById, setEditById] = useState(null);
@@ -16,91 +26,119 @@ const InventoryTable = ({ items, updateItem, deleteItem }) => {
   };
 
   return (
-    <table className="inventory-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Category</th>
-          <th>Quantity</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+    <TableContainer component={Paper} sx={{ mt: 3 }}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <strong>Name</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Category</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Quantity</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Actions</strong>
+            </TableCell>
+          </TableRow>
+        </TableHead>
 
-      <tbody>
-        {items.map((item) => (
-          <tr
-            key={item.id}
-            className={`inventory-row ${item.quantity < 10 ? "low-stock" : ""}`}
-          >
-            {editById === item.id ? (
-              <>
-                <td>
-                  <input
-                    type="text"
-                    className="edit-input"
-                    value={editedItem.name}
-                    onChange={(e) =>
-                      setEditedItem({ ...editedItem, name: e.target.value })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className="edit-input"
-                    value={editedItem.category}
-                    onChange={(e) =>
-                      setEditedItem({ ...editedItem, category: e.target.value })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    className="edit-input"
-                    value={editedItem.quantity}
-                    onChange={(e) =>
-                      setEditedItem({
-                        ...editedItem,
-                        quantity: Number(e.target.value),
-                      })
-                    }
-                  />
-                </td>
-                <td>
-                  <button className="save-btn" onClick={saveEdited}>
-                    Save
-                  </button>
-                  <button
-                    className="cancel-btn"
-                    onClick={() => setEditById(null)}
-                  >
-                    Cancel
-                  </button>
-                </td>
-              </>
-            ) : (
-              <>
-                <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>{item.quantity}</td>
-                <td>
-                  <button className="edit-btn" onClick={() => edit(item)}>
-                    Edit
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteItem(item.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </>
-            )}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+        <TableBody>
+          {items.map((item) => (
+            <TableRow
+              key={item.id}
+              sx={{
+                backgroundColor: item.quantity < 10 ? "#ffebee" : "inherit",
+              }}
+            >
+              {editById === item.id ? (
+                <>
+                  <TableCell>
+                    <TextField
+                      size="small"
+                      value={editedItem.name}
+                      onChange={(e) =>
+                        setEditedItem({ ...editedItem, name: e.target.value })
+                      }
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <TextField
+                      size="small"
+                      value={editedItem.category}
+                      onChange={(e) =>
+                        setEditedItem({
+                          ...editedItem,
+                          category: e.target.value,
+                        })
+                      }
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <TextField
+                      size="small"
+                      type="number"
+                      value={editedItem.quantity}
+                      onChange={(e) =>
+                        setEditedItem({
+                          ...editedItem,
+                          quantity: Number(e.target.value),
+                        })
+                      }
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="success"
+                      size="small"
+                      onClick={saveEdited}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      size="small"
+                      onClick={() => setEditById(null)}
+                      sx={{ ml: 1 }}
+                    >
+                      Cancel
+                    </Button>
+                  </TableCell>
+                </>
+              ) : (
+                <>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.category}</TableCell>
+                  <TableCell>{item.quantity}</TableCell>
+                  <TableCell>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      onClick={() => edit(item)}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      onClick={() => deleteItem(item.id)}
+                      sx={{ ml: 1 }}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </>
+              )}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 };
 

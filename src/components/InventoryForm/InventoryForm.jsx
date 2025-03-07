@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./InventoryForm.css";
+import { TextField, Button, Paper, Box } from "@mui/material";
 
 const InventoryForm = ({ addItem }) => {
   const [newItem, setNewItem] = useState({
@@ -11,45 +11,48 @@ const InventoryForm = ({ addItem }) => {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     addItem(newItem);
-    setNewItem({
-      name: "",
-      category: "",
-      quantity: 0,
-    });
+    setNewItem({ name: "", category: "", quantity: 0 });
   };
 
   return (
-    <form className="inventory-form" onSubmit={onSubmitHandler}>
-      <input
-        type="text"
-        className="input-field"
-        placeholder="Item Name"
-        value={newItem.name}
-        onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
-        required
-      />
-      <input
-        type="text"
-        className="input-field"
-        placeholder="Category"
-        value={newItem.category}
-        onChange={(e) => setNewItem({ ...newItem, category: e.target.value })}
-        required
-      />
-      <input
-        type="number"
-        className="input-field"
-        placeholder="Quantity"
-        value={newItem.quantity}
-        onChange={(e) =>
-          setNewItem({ ...newItem, quantity: Number(e.target.value) })
-        }
-        required
-      />
-      <button className="add-btn" type="submit">
-        Add Item
-      </button>
-    </form>
+    <Paper elevation={3} sx={{ p: 3, mt: 3 }}>
+      <form onSubmit={onSubmitHandler}>
+        <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+          <TextField
+            label="Item Name"
+            variant="outlined"
+            fullWidth
+            value={newItem.name}
+            onChange={(e) => setNewItem({ ...newItem, name: e.target.value })}
+            required
+          />
+          <TextField
+            label="Category"
+            variant="outlined"
+            fullWidth
+            value={newItem.category}
+            onChange={(e) =>
+              setNewItem({ ...newItem, category: e.target.value })
+            }
+            required
+          />
+          <TextField
+            label="Quantity"
+            variant="outlined"
+            type="number"
+            fullWidth
+            value={newItem.quantity}
+            onChange={(e) =>
+              setNewItem({ ...newItem, quantity: Number(e.target.value) })
+            }
+            required
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Add Item
+          </Button>
+        </Box>
+      </form>
+    </Paper>
   );
 };
 
